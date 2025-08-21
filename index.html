@@ -235,8 +235,7 @@
                 // Filter out specified repositories
                 const filteredRepos = repos.filter(repo => {
                     const repoName = repo.name.toLowerCase();
-                    return repoName !== 'menubot' && 
-                           repoName !== 'dsnyder.cloud' && 
+                    return repoName !== 'dsnyder.cloud' && 
                            repoName !== 'davidsnyder-nc.github.io';
                 });
 
@@ -245,21 +244,44 @@
                      return;
                 }
 
+                const specialRepoWebsites = {
+                    'menubot': 'https://menubot.app',
+                    'newsbear': 'https://newsbear.app',
+                    'briefnews': 'https://briefnews.app'
+                };
+
                 filteredRepos.forEach((repo, index) => {
                     const repoCard = document.createElement('div');
                     repoCard.className = 'bg-gray-800/50 rounded-xl p-6 flex flex-col justify-between ring-1 ring-white/10 shadow-lg animate-on-scroll';
                     repoCard.style.transitionDelay = `${index * 100}ms`; // Stagger effect
                     
+                    const description = repo.description || 'No description available.';
+                    let websiteLinkHTML = '';
+                    const repoNameLower = repo.name.toLowerCase();
+
+                    // Check if the current repo has a special website link
+                    if (specialRepoWebsites[repoNameLower]) {
+                        const url = specialRepoWebsites[repoNameLower];
+                        websiteLinkHTML = `
+                            <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-red-400 hover:text-red-300">
+                                Visit Website &rarr;
+                            </a>
+                        `;
+                    }
+
                     repoCard.innerHTML = `
                         <div>
                             <h3 class="text-xl font-bold text-white mb-2">${repo.name}</h3>
-                            <p class="text-gray-400 text-sm mb-4 h-20 overflow-hidden">${repo.description || 'No description available.'}</p>
+                            <p class="text-gray-400 text-sm mb-4 h-20 overflow-hidden">${description}</p>
                         </div>
-                        <div class="mt-4 flex justify-between items-center">
+                        <div class="mt-4 flex justify-between items-center gap-4">
                             <span class="text-xs text-gray-500">${repo.language ? `<span class="inline-block w-3 h-3 rounded-full bg-red-500 mr-1"></span>${repo.language}` : ''}</span>
-                            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-red-400 hover:text-red-300">
-                                View on GitHub &rarr;
-                            </a>
+                            <div class="flex items-center gap-4 flex-shrink-0">
+                                ${websiteLinkHTML}
+                                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-red-400 hover:text-red-300">
+                                    GitHub &rarr;
+                                </a>
+                            </div>
                         </div>
                     `;
                     reposContainer.appendChild(repoCard);
