@@ -233,11 +233,14 @@
                 loadingIndicator.style.display = 'none';
 
                 // Filter out specified repositories
-                const filteredRepos = repos.filter(repo => {
+                let filteredRepos = repos.filter(repo => {
                     const repoName = repo.name.toLowerCase();
                     return repoName !== 'dsnyder.cloud' && 
                            repoName !== 'davidsnyder-nc.github.io';
                 });
+
+                // Sort the filtered repositories alphabetically by name
+                filteredRepos.sort((a, b) => a.name.localeCompare(b.name));
 
                 if (filteredRepos.length === 0) {
                      reposContainer.innerHTML += `<p class="col-span-full text-center text-gray-400">No other public repositories found.</p>`;
