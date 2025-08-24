@@ -1,0 +1,40 @@
+# Menubot: Your Personal AI Recipe Assistant
+
+Menubot is a web-based application that acts as your personal AI-powered recipe and meal planning assistant. It leverages Google's Gemini AI to generate creative and customized recipes and full weekly meal plans based on your specific needs and preferences.
+
+## ✨ Features
+
+* **Single Recipe Generation:** Get a detailed recipe based on budget, number of people, main ingredients, cuisine type, and ingredients you already have.
+* **Weekly Meal Planning:** Generate a complete dinner meal plan for a specified number of days, including a consolidated shopping list and storage tips.
+* **Customization:** Tailor your results with custom instructions and dietary preferences like low-carb, low-sugar, meat-free, and no seafood.
+* **Interactive Results:**
+    * **Alter & Chat:** Modify a generated recipe or plan with new instructions, or ask follow-up questions using the integrated chat feature.
+    * **Version History:** Keep track of and revert to previous versions of your altered recipes.
+* **Shopping Lists:** Automatically generates a shopping list with estimated costs and direct links to search for items on Walmart.com.
+* **Recipe History:** Your generated recipes are saved locally in your browser, allowing you to revisit them later.
+* **Print-Friendly:** Easily print clean, well-formatted versions of your recipes and meal plans.
+* **Secure API Key Storage:** Your Google Gemini API key is stored securely in your browser's local storage and is never exposed to any other servers.
+
+## 🚀 How to Use
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/your-username/menubot.git](https://github.com/your-username/menubot.git)
+    ```
+2.  **Open `index.html`:** Navigate to the project directory and open the `index.html` file in your web browser.
+3.  **Get a Gemini API Key:**
+    * The application requires a Google Gemini API key to function.
+    * You can obtain a free key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+4.  **Set Your API Key:**
+    * Click on the "Settings" button in the Menubot application.
+    * Paste your Gemini API key into the input field and click "Save Key". The key will be saved in your browser for future use.
+5.  **Start Generating!**
+    * Fill out the form for either a single recipe or a weekly plan.
+    * Click "Generate Recipe" or "Generate Weekly Plan" and let the AI do the work!
+
+## 🛠️ Technologies Used
+
+* **HTML5:** For the structure of the web page.
+* **Tailwind CSS:** For styling and creating a responsive user interface.
+* **JavaScript (Vanilla):** For all the application logic, including API calls and DOM manipulation.
+* **Google Gemini API:** The core AI engine for generating recipe and meal plan content.
