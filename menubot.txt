@@ -8,8 +8,6 @@ menubot is a dynamic, single-page web application designed to simplify your culi
 
 ## About The Project
 
-![menubot Screenshot]<img src="screenshot.jpg" alt="Screenshot">
-
 Have you ever stared into your fridge, unsure of what to make? Or struggled to plan a week's worth of meals that fit your budget and dietary goals? menubot was built to solve these common problems.
 
 This application provides a seamless interface to:
