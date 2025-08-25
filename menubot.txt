@@ -1,40 +1,157 @@
-# Menubot: Your Personal AI Recipe Assistant
+# menubot 🤖🍳
 
-Menubot is a web-based application that acts as your personal AI-powered recipe and meal planning assistant. It leverages Google's Gemini AI to generate creative and customized recipes and full weekly meal plans based on your specific needs and preferences.
+**Your personal AI-powered recipe assistant and meal planner.**
 
-## ✨ Features
+menubot is a dynamic, single-page web application designed to simplify your culinary life. Leveraging the power of Google's Gemini AI, it generates custom recipes and full weekly meal plans based on your specific needs—from budget and dietary restrictions to the ingredients you already have on hand. It's more than just a recipe generator; it's a comprehensive tool for managing, altering, and interacting with your culinary creations.
 
-* **Single Recipe Generation:** Get a detailed recipe based on budget, number of people, main ingredients, cuisine type, and ingredients you already have.
-* **Weekly Meal Planning:** Generate a complete dinner meal plan for a specified number of days, including a consolidated shopping list and storage tips.
-* **Customization:** Tailor your results with custom instructions and dietary preferences like low-carb, low-sugar, meat-free, and no seafood.
-* **Interactive Results:**
-    * **Alter & Chat:** Modify a generated recipe or plan with new instructions, or ask follow-up questions using the integrated chat feature.
-    * **Version History:** Keep track of and revert to previous versions of your altered recipes.
-* **Shopping Lists:** Automatically generates a shopping list with estimated costs and direct links to search for items on Walmart.com.
-* **Recipe History:** Your generated recipes are saved locally in your browser, allowing you to revisit them later.
-* **Print-Friendly:** Easily print clean, well-formatted versions of your recipes and meal plans.
-* **Secure API Key Storage:** Your Google Gemini API key is stored securely in your browser's local storage and is never exposed to any other servers.
+---
 
-## 🚀 How to Use
+## About The Project
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/your-username/menubot.git](https://github.com/your-username/menubot.git)
+![menubot Screenshot]<img src="screenshot.jpg" alt="Screenshot">
+
+Have you ever stared into your fridge, unsure of what to make? Or struggled to plan a week's worth of meals that fit your budget and dietary goals? menubot was built to solve these common problems.
+
+This application provides a seamless interface to:
+* **Generate bespoke recipes** tailored to your budget, number of people, cuisine preferences, and available ingredients.
+* **Create comprehensive weekly meal plans** that are cost-effective and varied.
+* **Import your favorite recipes** from text, DOCX, or PDF files, and let the AI format them, create shopping lists, and make them interactive.
+* **Chat with an AI** about your recipes to ask for substitutions, cooking tips, or clarification on steps.
+* **Alter existing recipes** with simple text commands, like "make this vegetarian" or "double the servings."
+* **Manage your culinary collection** with a persistent history and a "My Recipes" section for your favorites.
+
+menubot is built to be entirely self-contained in a single HTML file, making it portable and easy to deploy. It uses Firebase for robust user authentication and data persistence, ensuring your recipes are saved and accessible across devices.
+
+### Built With
+
+* **Frontend:** HTML5, Tailwind CSS
+* **JavaScript:** Vanilla JS (ES6 Modules)
+* **Backend & Database:** Google Firebase (Authentication & Firestore)
+* **AI Model:** Google Gemini API
+* **File Parsing:** pdf.js, mammoth.js
+
+---
+
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+You will need a Google Firebase project and a Google Gemini API key.
+
+1.  **Firebase Setup**:
+    * Go to the [Firebase Console](https://console.firebase.google.com/).
+    * Create a new project.
+    * In your project, enable **Authentication** and add the "Email/Password" and "Google" sign-in providers.
+    * Enable **Firestore Database** in production mode.
+    * Go to Project Settings > General, and under "Your apps", create a new Web app.
+    * Copy the `firebaseConfig` object.
+
+2.  **Gemini API Key**:
+    * Go to [Google AI Studio](https://aistudio.google.com/app/apikey).
+    * Create a new API key.
+    * **For logged-in users (shared key)**: To allow authenticated users to use a shared key, you need to set it up in Firestore.
+        * Create a collection named `app_config`.
+        * Inside it, create a document named `api_keys`.
+        * Add a field to this document called `shared_gemini_key` and paste your API key as the value.
+
+### Installation
+
+1.  **Clone the repo (or download the HTML file)**
+    ```sh
+    git clone [https://github.com/your_username/menubot.git](https://github.com/your_username/menubot.git)
     ```
-2.  **Open `index.html`:** Navigate to the project directory and open the `index.html` file in your web browser.
-3.  **Get a Gemini API Key:**
-    * The application requires a Google Gemini API key to function.
-    * You can obtain a free key from [Google AI Studio](https://aistudio.google.com/app/apikey).
-4.  **Set Your API Key:**
-    * Click on the "Settings" button in the Menubot application.
-    * Paste your Gemini API key into the input field and click "Save Key". The key will be saved in your browser for future use.
-5.  **Start Generating!**
-    * Fill out the form for either a single recipe or a weekly plan.
-    * Click "Generate Recipe" or "Generate Weekly Plan" and let the AI do the work!
+2.  **Open `index.html`** in your favorite code editor.
+3.  **Configure Firebase**:
+    * Find the `firebaseConfig` object in the `<script type="module">` section.
+    * Replace the placeholder configuration with the one you copied from your Firebase project.
+4.  **Configure API Key (for Guest Mode)**:
+    * The application is designed for guests to enter their own API key via the UI. The key is then stored in their browser's local storage. If you wish to hardcode a key for guest access (not recommended for production), you can modify the `loadSettings` function.
+5.  **Open `index.html` in your browser** to run the application.
 
-## 🛠️ Technologies Used
+---
 
-* **HTML5:** For the structure of the web page.
-* **Tailwind CSS:** For styling and creating a responsive user interface.
-* **JavaScript (Vanilla):** For all the application logic, including API calls and DOM manipulation.
-* **Google Gemini API:** The core AI engine for generating recipe and meal plan content.
+## Features
+
+menubot is packed with features to make your meal planning and cooking experience better.
+
+### 1. User Authentication
+* **Email/Password & Google Sign-In**: Securely create an account to save your recipes and settings.
+* **Guest Mode**: Try the app without an account. Your data is saved in the browser's local storage.
+* **Account Linking**: Link a Google account to an existing email/password account for easier sign-in.
+* **Account Management**: Reset your recipe data or delete your account entirely.
+
+### 2. AI-Powered Generation
+* **Single Recipe Form**: Generate a single dinner recipe with fine-grained control over:
+    * Budget & Number of People
+    * Main Ingredient & Cuisine Type
+    * Ingredients you already have
+    * Custom instructions (e.g., "spicy", "kid-friendly")
+    * Dietary toggles (Low Carb, Low Sugar, No Seafood, etc.)
+* **Weekly Plan Form**: Generate a complete meal plan for a specified number of days, with similar controls for budget, people, and dietary needs.
+
+### 3. Recipe Import
+* **Paste Text**: Directly paste recipe text into the app.
+* **File Upload**: Upload `.txt`, `.pdf`, or `.docx` files. The app uses client-side libraries to parse the content and sends it to the AI for formatting.
+* **Automatic Formatting**: Imported recipes are automatically converted into the app's standard JSON format, with generated shopping lists, nutritional info, and cost estimates.
+
+### 4. Interactive Recipe Viewing
+* **Detailed Recipe Card**: View recipes with a clear layout, including description, servings, estimated cost, and nutritional information.
+* **Clickable Shopping List**: The shopping list links directly to your preferred grocery store's search page (configurable in settings).
+* **Version History**: When you alter a recipe, the previous versions are saved. You can easily switch between the current and past versions.
+* **Image Upload**: Add your own photo to any saved recipe. Images are converted to base64 and stored in Firestore.
+
+### 5. Post-Generation Interaction
+* **Alter Recipe**: Make changes to a recipe using natural language (e.g., "make it gluten-free," "add a side dish"). The AI generates a new version while saving the old one.
+* **AI Chat**: Open a chat window for any recipe to ask questions, get substitution ideas, or ask for cooking tips. The chat history is saved with the recipe.
+* **Personal Notes**: Add and save your own notes to any recipe, such as personal tweaks or serving suggestions.
+
+### 6. Recipe Management
+* **History & My Recipes**: All generated and imported recipes are saved. You can mark any recipe as a favorite to add it to "My Recipes."
+* **Search**: Quickly search through your history and saved recipes by title or notes.
+* **Clear History**: Remove all non-favorite recipes from your history.
+
+### 7. Data Management
+* **Import/Export**: Export your recipes (history, favorites, or both) to a `JSON`, `TXT`, or `CSV` file for backup. You can import recipes from a `JSON` file.
+
+---
+
+## Usage
+
+1.  **Choose Your Mode**: Upon visiting, either sign in, create an account, or continue as a guest. Guests will need to provide their own Gemini API key in the settings.
+2.  **Generate a Recipe or Plan**:
+    * Select the "Single Recipe" or "Weekly Plan" tab.
+    * Fill in the form with your preferences. The more detail you provide, the better the result.
+    * Click "Generate" and watch the AI work!
+3.  **View the Result**:
+    * The generated recipe or plan will be displayed.
+    * Review the shopping list. Click any item to search for it at your preferred store.
+    * Read through the instructions.
+4.  **Interact and Refine**:
+    * Not quite right? Use the "Alter Recipe" tab to request a change.
+    * Have a question? Use the "Chat" tab to ask the AI assistant.
+    * Made the recipe and loved it? Use the "Notes" tab to save your thoughts and add a photo.
+5.  **Save and Organize**:
+    * Click "Save to My Recipes" to mark it as a favorite.
+    * Access all your past creations via the "History" button in the header.
+
+---
+
+## Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+---
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
