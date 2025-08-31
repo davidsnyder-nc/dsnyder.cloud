@@ -103,9 +103,6 @@ async function fetchRepos() {
     }
 
     const specialRepoWebsites = {
-      'menubot': 'https://menubot.app',
-      'newsbear': 'https://newsbear.app',
-      'briefnews': 'https://briefnews.app',
       'gitvault': 'https://gitvault.app'
     };
 
@@ -122,12 +119,6 @@ async function fetchRepos() {
         const url = specialRepoWebsites[repoNameLower];
         websiteLinkHTML = `
           <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-white">
-            Website
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5H21m0 0v7.5m0-7.5L10.5 15M6 6h.008v.008H6V6z"/></svg>
-          </a>`;
-      } else if (repo.homepage) {
-        websiteLinkHTML = `
-          <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-white">
             Website
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5H21m0 0v7.5m0-7.5L10.5 15M6 6h.008v.008H6V6z"/></svg>
           </a>`;
@@ -374,4 +365,3 @@ contactForm.addEventListener('submit', function(e) {
 
 // Fetch repositories on page load
 fetchRepos();
-
