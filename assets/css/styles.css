@@ -1,0 +1,206 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+/* Simple scrollbar styling for a more modern look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1f2937; /* gray-800 */
+}
+::-webkit-scrollbar-thumb {
+    background: #4b5563; /* gray-600 */
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* gray-500 */
+}
+
+/* Initial animation styles */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Bouncing letter animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.bounce-letter {
+    display: inline-block;
+}
+
+#logo-text.is-animating .bounce-letter {
+    animation: bounce 0.5s ease-in-out;
+}
+
+/* Stagger the letter animation */
+#logo-text.is-animating .bounce-letter:nth-child(1) { animation-delay: 0s; }
+#logo-text.is-animating .bounce-letter:nth-child(2) { animation-delay: 0.05s; }
+#logo-text.is-animating .bounce-letter:nth-child(3) { animation-delay: 0.1s; }
+#logo-text.is-animating .bounce-letter:nth-child(4) { animation-delay: 0.15s; }
+#logo-text.is-animating .bounce-letter:nth-child(5) { animation-delay: 0.2s; }
+#logo-text.is-animating .bounce-letter:nth-child(6) { animation-delay: 0.25s; }
+#logo-text.is-animating .bounce-letter:nth-child(7) { animation-delay: 0.3s; }
+#logo-text.is-animating .bounce-letter:nth-child(8) { animation-delay: 0.35s; }
+#logo-text.is-animating .bounce-letter:nth-child(9) { animation-delay: 0.4s; }
+#logo-text.is-animating .bounce-letter:nth-child(10) { animation-delay: 0.45s; }
+#logo-text.is-animating .bounce-letter:nth-child(11) { animation-delay: 0.5s; }
+#logo-text.is-animating .bounce-letter:nth-child(12) { animation-delay: 0.55s; }
+#logo-text.is-animating .bounce-letter:nth-child(13) { animation-delay: 0.6s; }
+
+/* Logo glow animation */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 1), 0 0 30px rgba(239, 68, 68, 0.8);
+    }
+}
+
+.logo-glow {
+    animation: glow 1.5s ease-in-out;
+}
+
+/* --- Dialog (Modal) Styles --- */
+.modal-dialog {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+.modal-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.0);
+    backdrop-filter: blur(0px);
+    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+.modal-dialog[open]::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+/* --- Modal Animation --- */
+.modal-content {
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-dialog[open] .modal-content {
+    transform: translateY(0);
+}
+
+/* --- Styles for rendered markdown content in the modal --- */
+#modal-body {
+    color: #d1d5db; /* gray-300 - Default text color */
+    line-height: 1.6;
+}
+#modal-body h1, #modal-body h2, #modal-body h3, #modal-body h4, #modal-body h5, #modal-body h6 {
+    color: #ffffff; /* white */
+    border-bottom: 1px solid #374151; /* gray-700 */
+    padding-bottom: 0.4em;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+#modal-body a {
+    color: #f87171; /* red-400 */
+    text-decoration: underline;
+}
+#modal-body a:hover {
+    color: #ef4444; /* red-500 */
+}
+#modal-body code {
+    background-color: #111827; /* gray-900 */
+    border-radius: 6px;
+    padding: 0.2em 0.4em;
+    font-family: monospace;
+    color: #f3f4f6; /* gray-100 */
+}
+#modal-body pre {
+    background-color: #111827; /* gray-900 */
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+#modal-body pre code {
+    padding: 0;
+    background-color: transparent;
+}
+#modal-body img {
+    border-radius: 8px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff; /* Add a white background for transparent images */
+}
+#modal-body ul, #modal-body ol {
+    padding-left: 2em;
+}
+#modal-body blockquote {
+    border-left: 4px solid #4b5563; /* gray-600 */
+    padding-left: 1em;
+    color: #9ca3af; /* gray-400 */
+    margin-left: 0;
+}
+#modal-body hr {
+    border-top: 1px solid #374151; /* gray-700 */
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+/* Subtle animated accent for Menubot hero */
+.accent-animate {
+    position: absolute;
+    inset: -2px;
+    border-radius: 1.25rem; /* ~20px */
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(239,68,68,.08), transparent 60%),
+                radial-gradient(1000px 500px at 90% 30%, rgba(244,63,94,.06), transparent 60%);
+    pointer-events: none;
+    overflow: hidden;
+}
+.accent-animate::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.08), transparent 30%);
+    animation: spin-slow 12s linear infinite;
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+
+/* Shimmer bar */
+.shimmer {
+    position: relative;
+    height: 3px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);
+    overflow: hidden;
+}
+.shimmer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+    animation: shimmer-move 2.2s linear infinite;
+}
+@keyframes shimmer-move { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
